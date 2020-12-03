@@ -10,7 +10,7 @@ import (
 )
 
 func main(){
-	for l := len(os.Args)-1;l > 0 ; l --{
+	for l := 1 ; l < len(os.Args); l ++{
 		mac := os.Args[l]
 		hw , err := net.ParseMAC(mac)
 		if err != nil{
