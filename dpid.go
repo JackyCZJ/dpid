@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net"
 	"os"
 	"strconv"
@@ -22,20 +21,12 @@ func main() {
 			fmt.Println(mac, " : ", err)
 			continue
 		}
-		macArray := strings.Split(hw.String(), ":")
-		for i := range macArray {
-			val := macArray[i]
-			n, err := strconv.ParseUint(val, 16, 32)
-			if err != nil {
-				log.Println(err.Error())
-				break
-			}
-			if n != 0 && i != 0 {
-				n2 := uint32(n)
-				fmt.Print(n2)
-			}
-
+		macStr := strings.Replace(hw.String(),":","",-1)
+		dpid , err := strconv.ParseInt(macStr,16,64)
+		if err != nil{
+			fmt.Println(mac, " : ", err)
+			continue
 		}
-		fmt.Print("\n")
+		fmt.Println(dpid)
 	}
 }
